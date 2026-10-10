@@ -1,347 +1,154 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ahhhhhh uuuuukkkkkkchhhhhhhh</title>
+    <title>Saloua's Antigravity Playground</title>
     <style>
-        body, html {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #0d1117;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #58a6ff;
-            user-select: none;
         }
 
-        #ui-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            padding: 2rem;
+            max-width: 600px;
             z-index: 10;
-            pointer-events: none; /* Let cursor interactions pass through to the background */
         }
 
         h1 {
-            text-align: center;
-            text-shadow: 0 0 15px #58a6ff;
-            margin-top: 20px;
             font-size: 2.5rem;
-            pointer-events: auto;
+            color: #38bdf8;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
         }
 
-        p.instructions {
-            font-size: 1.3rem;
-            text-align: center;
-            max-width: 650px;
-            color: #c9d1d9;
-            pointer-events: auto;
-            text-shadow: 0 0 8px rgba(201, 209, 217, 0.5);
-            background: rgba(13, 17, 23, 0.7);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #30363d;
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            color: #94a3b8;
         }
 
-        #calibrate-btn {
-            pointer-events: auto;
-            margin-top: 40px;
-            padding: 18px 36px;
-            font-size: 1.6rem;
-            font-weight: 800;
+        button {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
             color: white;
-            background-color: #da3633;
-            border: 3px solid #ff7b72;
-            border-radius: 12px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 0 20px #da3633;
+            box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.2s ease-in-out;
+            letter-spacing: 1px;
         }
 
-        #calibrate-btn:hover {
-            background-color: #f85149;
-            box-shadow: 0 0 35px #ff7b72;
-            transform: scale(1.08);
+        button:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 15px 35px -5px rgba(239, 68, 68, 0.7);
         }
 
-        /* The floating gravity elements */
-        .ball {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #ffffff, #58a6ff);
-            box-shadow: 0 0 15px #58a6ff;
-            will-change: transform;
+        button:active {
+            transform: scale(0.98);
         }
 
-        /* Prank Layer */
-        #prank-layer {
+        /* Fullscreen Prank Overlay */
+        #prank-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             background-color: black;
             z-index: 9999;
             display: none;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
         }
 
-        /* Shaking, color-inverting SVG Screamer Face */
-        #screamer {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            animation: shake 0.05s infinite;
+        #middle-finger {
+            font-size: 15rem;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 10px;
         }
 
-        @keyframes shake {
-            0% { transform: translate(15px, 15px) scale(1.1); filter: invert(0) contrast(1.5); }
-            25% { transform: translate(-15px, -15px) scale(1.2); filter: invert(1) contrast(2); }
-            50% { transform: translate(15px, -15px) scale(1.1); filter: invert(0) contrast(1.5); }
-            75% { transform: translate(-15px, 15px) scale(1.3); filter: invert(1) contrast(2); }
-            100% { transform: translate(15px, 15px) scale(1.1); filter: invert(0) contrast(1.5); }
-        }
-
-        #meme-message {
-            display: none;
-            color: #ffffff;
-            font-size: 4rem;
-            font-family: 'Impact', 'Arial Black', sans-serif;
-            text-align: center;
-            text-shadow: 3px 3px 0 #000, -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 0 0 20px #ff0000;
-            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            padding: 30px;
+        #joke-message {
+            color: #fde047;
+            font-size: 4.5rem;
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 1), 3px 3px 0 #000, -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000;
+            padding: 20px;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s both;
         }
 
         @keyframes popIn {
             0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
             100% { transform: scale(1); opacity: 1; }
         }
 
+        /* Background grid effect for "physics simulator" vibe */
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Beautiful Science UI -->
-    <div id="ui-layer">
-        <h1>ah uk hhhhhhhhhhhh</h1>
-        <p class="instructions">
-            Welcome to the -G simulation! 🌌<br><br>
-            Move your mouse around the screen to shift the gravitational field and interact with the floating matter.<br><br>
-            Click the red button below to <strong>CALIBRATE GRAVITY</strong> and test heavy weight physics.
-        </p>
-        <button id="calibrate-btn">Calibrate Gravity</button>
+    <div class="grid-bg"></div>
+
+    <div class="container" id="main-ui">
+        <h1>welcome saloua</h1>
+        <p>Welcome to the advanced physics environment. Please initialize the gravitational field test module.</p>
+        <button id="trigger-btn">Calibrate Gravity</button>
     </div>
 
-    <!-- The Hidden Prank Layer -->
-    <div id="prank-layer">
-        <!-- Terrifying SVG Face -->
-        <svg id="screamer" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100" height="100" fill="black"/>
-            <!-- Skull Base -->
-            <path d="M 20 40 Q 50 0 80 40 Q 90 90 50 95 Q 10 90 20 40 Z" fill="white"/>
-            <!-- Hollow Eyes -->
-            <circle cx="35" cy="45" r="14" fill="black"/>
-            <circle cx="65" cy="45" r="14" fill="black"/>
-            <!-- Glowing Red Pupils -->
-            <circle cx="35" cy="45" r="3" fill="red"/>
-            <circle cx="65" cy="45" r="3" fill="red"/>
-            <!-- Skeletal Nose -->
-            <path d="M 47 62 L 53 62 L 50 50 Z" fill="black"/>
-            <!-- Wide Open Screaming Mouth -->
-            <ellipse cx="50" cy="78" rx="18" ry="14" fill="black"/>
-            <!-- Creepy Teeth Lines -->
-            <path d="M 32 78 L 68 78" stroke="white" stroke-width="1.5"/>
-            <path d="M 40 64 L 40 92 M 50 64 L 50 92 M 60 64 L 60 92" stroke="white" stroke-width="1.5"/>
-            <!-- Bloody Tears -->
-            <path d="M 35 59 Q 33 75 35 85 Q 37 75 35 59 Z" fill="red" opacity="0.8"/>
-            <path d="M 65 59 Q 63 75 65 85 Q 67 75 65 59 Z" fill="red" opacity="0.8"/>
-        </svg>
-        <!-- The Final Meme Message -->
-        <div id="meme-message">GOT YOU SALOUA! 🪦🤣<br><br><span style="font-size: 2rem; color: #ffeb3b;">Don't panic, it's just a prank!</span></div>
+    <!-- The hidden prank overlay -->
+    <div id="prank-overlay">
+        <div id="middle-finger">🖕</div>
+        <div id="joke-message"> fuck you<br>!!!!!!</div>
     </div>
 
     <script>
-        // --- 1. Physics Engine for Floating Balls ---
-        const balls = [];
-        const numBalls = 45;
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
+        const triggerBtn = document.getElementById('trigger-btn');
+        const prankOverlay = document.getElementById('prank-overlay');
+        const mainUi = document.getElementById('main-ui');
 
-        // Initialize particles
-        for (let i = 0; i < numBalls; i++) {
-            const ball = document.createElement('div');
-            ball.className = 'ball';
-            const size = Math.random() * 50 + 15;
-            ball.style.width = size + 'px';
-            ball.style.height = size + 'px';
-            
-            // Random vibrant colors
-            const hues = [210, 280, 320, 150, 45, 190];
-            const hue = hues[Math.floor(Math.random() * hues.length)];
-            ball.style.background = `radial-gradient(circle at 30% 30%, #ffffff, hsl(${hue}, 100%, 50%))`;
-            ball.style.boxShadow = `0 0 20px hsl(${hue}, 100%, 50%)`;
-
-            document.body.appendChild(ball);
-
-            balls.push({
-                el: ball,
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
-                vx: (Math.random() - 0.5) * 5,
-                vy: (Math.random() - 0.5) * 5,
-                size: size
-            });
-        }
-
-        // Track Mouse
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        // Animation Loop
-        function updatePhysics() {
-            balls.forEach(b => {
-                // Distance to mouse cursor
-                const dx = mouseX - (b.x + b.size/2);
-                const dy = mouseY - (b.y + b.size/2);
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                
-                // Antigravity (Repel) Effect when mouse gets close
-                if (dist < 250) {
-                    b.vx -= (dx / dist) * 0.8;
-                    b.vy -= (dy / dist) * 0.8;
-                }
-
-                // Air Friction to prevent infinite speed
-                b.vx *= 0.985;
-                b.vy *= 0.985;
-
-                // Apply velocity
-                b.x += b.vx;
-                b.y += b.vy;
-
-                // Bounce off screen edges
-                if (b.x <= 0 || b.x >= window.innerWidth - b.size) {
-                    b.vx *= -1;
-                    b.x = b.x <= 0 ? 0 : window.innerWidth - b.size;
-                }
-                if (b.y <= 0 || b.y >= window.innerHeight - b.size) {
-                    b.vy *= -1;
-                    b.y = b.y <= 0 ? 0 : window.innerHeight - b.size;
-                }
-
-                // Update DOM element position
-                b.el.style.transform = `translate(${b.x}px, ${b.y}px)`;
-            });
-            requestAnimationFrame(updatePhysics);
-        }
-        updatePhysics(); // Start loop
-
-
-        // --- 2. The Prank Logic ---
-        const btn = document.getElementById('calibrate-btn');
-        const prankLayer = document.getElementById('prank-layer');
-        const screamer = document.getElementById('screamer');
-        const memeMsg = document.getElementById('meme-message');
-        const uiLayer = document.getElementById('ui-layer');
-
-        // Synthesize a horrifying screech using Web Audio API (No external files needed!)
-        function playHorrorScream() {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            if (!AudioContext) return;
-            const audioCtx = new AudioContext();
-            
-            // Create multiple chaotic oscillators for a dissonant screech
-            for (let i = 0; i < 6; i++) {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                
-                osc.type = (i % 2 === 0) ? 'sawtooth' : 'square';
-                // Very high pitch piercing frequencies
-                osc.frequency.setValueAtTime(800 + i * 300, audioCtx.currentTime);
-                // Pitch rises up sharply simulating a scream
-                osc.frequency.exponentialRampToValueAtTime(4000 + i * 500, audioCtx.currentTime + 0.5);
-                
-                // Add rapid frequency modulation (vibrato) for distress effect
-                const mod = audioCtx.createOscillator();
-                mod.type = 'sine';
-                mod.frequency.value = 40 + i * 12; // Fast wobble
-                const modGain = audioCtx.createGain();
-                modGain.gain.value = 800; // Modulate pitch by a lot
-                mod.connect(modGain);
-                modGain.connect(osc.frequency);
-                mod.start();
-
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                
-                // High initial volume, tapering off slightly
-                gain.gain.setValueAtTime(0.8, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 2.8);
-                
-                osc.start();
-                
-                // Stop audio right before 3 seconds
-                setTimeout(() => {
-                    osc.stop();
-                    mod.stop();
-                }, 2900);
-            }
-        }
-
-        // Trigger Event
-        btn.addEventListener('click', () => {
-            // 1. Force Fullscreen to trap the user
+        triggerBtn.addEventListener('click', () => {
+            // 1. Request Fullscreen to trap the user
             const docElm = document.documentElement;
-            if (docElm.requestFullscreen) {
-                docElm.requestFullscreen().catch(err => console.log(err));
-            } else if (docElm.webkitRequestFullScreen) {
-                docElm.webkitRequestFullScreen();
-            } else if (docElm.msRequestFullscreen) {
-                docElm.msRequestFullscreen();
-            }
+            if (docElm.requestFullscreen) docElm.requestFullscreen().catch(e => console.log(e));
+            else if (docElm.webkitRequestFullScreen) docElm.webkitRequestFullScreen();
+            else if (docElm.msRequestFullscreen) docElm.msRequestFullscreen();
 
-            // 2. Hide regular UI, show screamer
-            uiLayer.style.display = 'none';
-            prankLayer.style.display = 'flex';
-            
-            // 3. BLAST the screech audio
-            playHorrorScream();
-
-            // 4. Wait 3 seconds, then reveal the meme!
-            setTimeout(() => {
-                // Hide the scary face
-                screamer.style.display = 'none';
-                // Show the joke message
-                memeMsg.style.display = 'block';
-                // Change background slightly so it's less intense
-                prankLayer.style.backgroundColor = '#10141a'; 
-            }, 3000);
-        });
-
-        // Ensure window resizing doesn't break ball bounds
-        window.addEventListener('resize', () => {
-            balls.forEach(b => {
-                if(b.x > window.innerWidth) b.x = window.innerWidth - b.size;
-                if(b.y > window.innerHeight) b.y = window.innerHeight - b.size;
-            });
+            // 2. Hide Main UI, Show Overlay with the emoji and joke
+            mainUi.style.display = 'none';
+            prankOverlay.style.display = 'flex';
         });
     </script>
 </body>
